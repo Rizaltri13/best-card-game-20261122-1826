@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Clash — Duel of the Four Embers</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">🔥 EMBER CLASH</div>
+    <div class="topinfo"><span id="turnLabel">Duel of the Four Embers</span></div>
+    <div class="topbtns">
+      <button id="soundBtn" class="mini" title="Toggle sound (M)">♪ On</button>
+      <button id="helpBtn" class="mini" title="How to play (H)">?</button>
+    </div>
+  </header>
+
+  <main id="table">
+    <!-- Rival side -->
+    <section id="rivalZone" class="side rival">
+      <div class="fighter">
+        <div class="avatar rival-avatar">🦊</div>
+        <div class="fighter-info">
+          <div class="fighter-name">Cinder Warden <span class="tag">RIVAL</span></div>
+          <div class="lifebar"><div id="rivalLifeFill" class="life-fill"></div><span id="rivalLifeText" class="life-text">30 / 30</span></div>
+          <div class="stat-row">
+            <span id="rivalShield" class="shield-badge">🛡 0</span>
+            <span id="rivalMana" class="mana-badge">◆ 0/0</span>
+            <span id="rivalDeck" class="deck-badge">🂠 Deck 20</span>
+          </div>
+        </div>
+      </div>
+      <div id="rivalHand" class="hand hand-back" aria-label="Rival hand"></div>
+      <div id="rivalPlayed" class="played-slot"><span class="slot-label">Rival's last card</span></div>
+    </section>
+
+    <!-- Middle clash zone -->
+    <section id="midZone">
+      <div id="clashLog" class="clash-log" aria-live="polite"></div>
+      <div id="resonance" class="resonance hidden">✦ RESONANCE ✦<span id="resonanceText"></span></div>
+      <button id="endTurnBtn" class="end-turn" disabled>End Turn ⏎</button>
+      <div class="hint">Keys: <b>1–7</b> play card · <b>E</b> end turn · <b>R</b> restart</div>
+    </section>
+
+    <!-- Player side -->
+    <section id="playerZone" class="side player">
+      <div id="playerPlayed" class="played-slot"><span class="slot-label">Your last card</span></div>
+      <div id="playerHand" class="hand" aria-label="Your hand"></div>
+      <div class="fighter">
+        <div class="avatar player-avatar">🧑‍🚀</div>
+        <div class="fighter-info">
+          <div class="fighter-name">Emberkeeper <span class="tag you">YOU</span></div>
+          <div class="lifebar"><div id="playerLifeFill" class="life-fill"></div><span id="playerLifeText" class="life-text">30 / 30</span></div>
+          <div class="stat-row">
+            <span id="playerShield" class="shield-badge">🛡 0</span>
+            <span id="playerMana" class="mana-badge">◆ 0/0</span>
+            <span id="playerDeck" class="deck-badge">🂠 Deck 20</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Title overlay -->
+  <div id="titleScreen" class="overlay">
+    <div class="panel title-panel">
+      <div class="title-embers">🔥 💧 🌿 ⬢</div>
+      <h1>EMBER CLASH</h1>
+      <p class="subtitle">Duel of the Four Embers</p>
+      <p class="rules">Four elements. One deck. Thirty life.<br>
+      Spend <b class="mana-word">◆ mana</b> to play cards — strike, shield, heal, draw.<br>
+      Play <b>two cards of the same element</b> in one turn for <b>+2 Resonance damage</b>.<br>
+      Reduce the Cinder Warden to <b>0 life</b> before yours runs out.</p>
+      <button id="startBtn" class="big-btn">▶ &nbsp;Start Duel</button>
+      <p class="keys-line">Mouse or keyboard: <b>1–7</b> play a card · <b>E</b> end turn · <b>M</b> sound</p>
+    </div>
+  </div>
+
+  <!-- Help overlay -->
+  <div id="helpScreen" class="overlay hidden">
+    <div class="panel help-panel">
+      <h2>How to play</h2>
+      <ul>
+        <li>Each turn you gain <b>+1 max mana</b> (up to 10) and draw a card.</li>
+        <li>Click a card (or press <b>1–7</b>) to play it if you can afford its cost.</li>
+        <li><span class="el ember">🔥 Ember</span> hits hard. <span class="el tide">💧 Tide</span> draws cards. <span class="el thorn">🌿 Thorn</span> heals. <span class="el stone">⬢ Stone</span> shields.</li>
+        <li><b>Resonance:</b> two cards of the same element in one turn — the second deals +2 damage.</li>
+        <li>Damage hits shields first, then life. First to 0 life loses.</li>
+        <li>Press <b>E</b> (or End Turn) when done. The Warden plays, then it is your turn again.</li>
+      </ul>
+      <button id="closeHelpBtn" class="big-btn">Got it</button>
+    </div>
+  </div>
+
+  <!-- End overlay -->
+  <div id="endScreen" class="overlay hidden">
+    <div class="panel end-panel">
+      <div id="endEmoji" class="end-emoji">🏆</div>
+      <h1 id="endTitle">VICTORY</h1>
+      <p id="endText" class="end-text"></p>
+      <div id="endStats" class="end-stats"></div>
+      <button id="againBtn" class="big-btn">↻ &nbsp;Play Again</button>
+      <p class="keys-line">Press <b>R</b> to duel again</p>
+    </div>
+  </div>
+
+  <div id="floaters"></div>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
